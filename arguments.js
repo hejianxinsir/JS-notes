@@ -1,4 +1,4 @@
-// arguments 通过 arguments 可以获得一个函数里的所有参数。它像数组，有 length 属性，但不是数组，没有数组特有的 push pop 等方法。
+// arguments 通过 arguments 可以获得一个函数里的所有参数。注意，arguments 只能在函数内使用。它像数组，有 length 属性，但不是数组，没有数组特有的 push pop 等方法。
 
 function fn1(a,b,c){
 	console.log(arguments[0])
@@ -34,3 +34,19 @@ function fn(){
 }
 
 fn()	// true
+
+// 如何拿到字符串参数中，字符串最长的那个参数？
+
+function longestString(){
+	var longest = '';
+	for(var i=0; i<arguments.length; i++){
+		if(arguments[i].length > longest.length){
+			longest = arguments[i];
+		}
+	}
+
+	return longest;
+}
+
+
+
