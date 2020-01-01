@@ -1,3 +1,7 @@
+
+// async 只有标记作用，没其他了...
+// async 函数都会返回 promise  重点！
+
 function 摇色子(){
   return new Promise((resolve,reject)=>{
     setTimeout(()=>{
@@ -59,4 +63,21 @@ test2()
 // 为了追求同步代码。把异步代码写成同步代码，使执行顺序更明显。
 
 // 如果同时摇两个色子呢？我们先用 then 写一下
-Promise.all([])
+// Promise.all 接受一个数组，数组里放返回promise函数的函数
+// 这里的 then 有成功失败函数，成功函数在前两个猜大小函数都成功的时候调用
+// 如果两个猜大小函数都一个或以上出问题了，都会执行失败函数
+
+Promise.all([猜大小('大'), 猜大小('小')])   
+  .then(()=>{}, ()=>{})
+
+// 那用 await 怎么写？
+// 补充：还可以用 promise.race 用法跟 promise.all 的区别是，all 需要两个都成功才成功，race 只要一个成功就成功了。
+
+async function test(){
+  try{
+    let n = await Promise.all([猜大小('大'), 猜大小('小')])
+    console.log(n)
+  }catch{
+    console.log(error)
+  }
+}
